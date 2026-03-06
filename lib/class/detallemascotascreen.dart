@@ -55,5 +55,4 @@ class DetalleMascotaScreen extends StatelessWidget{
       ),
     );
   }
-
 }

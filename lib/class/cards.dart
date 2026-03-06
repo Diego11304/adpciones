@@ -1,6 +1,7 @@
 import 'package:adopcionesmascotas/model/mascota.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'detallemascotascreen.dart';
 
 class MascotaCard extends StatelessWidget{
   final Mascota mascota;
@@ -12,12 +13,12 @@ class MascotaCard extends StatelessWidget{
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: (){
-        /*Navigator.push(
+        Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (_)=>DetalleMascotaScreen(mascota: mascota)
             )
-        );*/
+        );
       },
       child: Card(
         elevation: 4,
