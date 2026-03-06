@@ -9,6 +9,13 @@ final List<Mascota> mascotas=[
     descripcion: 'Gata'
   ),
   Mascota(
+      nombre: 'Gato',
+      tipo: 'Gato',
+      edad: 4,
+      imagen: 'assets/gatopensando.jpeg',
+      descripcion: 'Gato'
+  ),
+  Mascota(
       nombre: 'Raky',
       tipo: 'Gato',
       edad: 1,
