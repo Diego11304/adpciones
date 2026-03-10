@@ -1,3 +1,4 @@
+import 'package:adopcionesmascotas/class/detallemascotasscreen2.dart';
 import 'package:adopcionesmascotas/model/mascota.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MascotaCard extends StatelessWidget{
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_)=>DetalleMascotaScreen(mascota: mascota)
+                builder: (_)=>DetalleMascotaScreen2(mascota: mascota)
             )
         );
       },
