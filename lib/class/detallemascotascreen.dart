@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../model/mascota.dart';
 
 class DetalleMascotaScreen extends StatelessWidget{
   final Mascota mascota;
-
   DetalleMascotaScreen({super.key,required this.mascota});
 
   @override
