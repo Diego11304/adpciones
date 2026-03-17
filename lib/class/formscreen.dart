@@ -110,5 +110,8 @@ String? validarNombre(String? value){
     return"ingrese su nombre";
   }
   RegExp regexp=RegExp(r'^[a-zA-Záéió]+$');
+  if(!regexp.hasMatch(value)){
+    return 'Solo permite letras';
+  }
 }
 
