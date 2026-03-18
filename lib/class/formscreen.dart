@@ -78,7 +78,7 @@ class _FormScreen extends State<FormScreen>{
               labelText: 'Nombre Completo',
               border: OutlineInputBorder(),
             ),
-            validator:validarDireccion,
+            maxLines: 2,
           ),
           SizedBox(height: 30,),
             SizedBox(
@@ -115,33 +115,25 @@ String? validarNombre(String? value){
   }
 }
 
-String? validarEmail(String? value){
-  if (value==null || value.isEmpty){
-    return"ingrese su nombre";
+String? validarTelefono(String? value) {
+  if (value == null || value.isEmpty) {
+    return "Ingrese su teléfono";
   }
-  RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  if(!emailRegex.hasMatch(value)){
-    return 'Ingrese un correo valido';
+  RegExp regex = RegExp(r'^[0-9]{10}$');
+  if (!regex.hasMatch(value)) {
+    return "El teléfono debe tener 10 dígitos";
   }
+  return null;
 }
 
-String? validarTelefono(String? value){
-  if (value==null || value.isEmpty){
-    return"ingrese su nombre";
+String? validarEmail(String? value) {
+  if (value == null || value.isEmpty) {
+    return "Ingrese su correo";
   }
-  RegExp telRegex = RegExp(r'^[0-9]{10}$');
-  if(!telRegex.hasMatch(value)){
-    return 'El teléfono debe tener 10 dígitos';
+  RegExp regex = RegExp(
+      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  if (!regex.hasMatch(value)) {
+    return "Correo inválido";
   }
+  return null;
 }
-
-String? validarDireccion(String? value){
-  if (value==null || value.isEmpty){
-    return"ingrese su nombre";
-  }
-  RegExp dirRegex = RegExp(r'^[a-zA-Z0-9\s#\-\.,áéíóúÁÉÍÓÚñÑ]+$');
-  if(!dirRegex.hasMatch(value)){
-    return 'La dirreccion no es valida';
-  }
-}
-

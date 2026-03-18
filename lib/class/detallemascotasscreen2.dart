@@ -1,3 +1,4 @@
+import 'package:adopcionesmascotas/class/formscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -76,7 +77,12 @@ class DetalleMascotaScreen2 extends StatelessWidget{
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_)=>FormScreen(mascota: mascota)
+                          ));
+                    },
                     icon: const Icon(Icons.favorite),
                     label: const Text('Solicitar adopción'),
                   ),
