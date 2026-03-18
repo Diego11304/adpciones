@@ -115,3 +115,33 @@ String? validarNombre(String? value){
   }
 }
 
+String? validarEmail(String? value){
+  if (value==null || value.isEmpty){
+    return"ingrese su nombre";
+  }
+  RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  if(!emailRegex.hasMatch(value)){
+    return 'Ingrese un correo valido';
+  }
+}
+
+String? validarTelefono(String? value){
+  if (value==null || value.isEmpty){
+    return"ingrese su nombre";
+  }
+  RegExp telRegex = RegExp(r'^[0-9]{10}$');
+  if(!telRegex.hasMatch(value)){
+    return 'El teléfono debe tener 10 dígitos';
+  }
+}
+
+String? validarDireccion(String? value){
+  if (value==null || value.isEmpty){
+    return"ingrese su nombre";
+  }
+  RegExp dirRegex = RegExp(r'^[a-zA-Z0-9\s#\-\.,áéíóúÁÉÍÓÚñÑ]+$');
+  if(!dirRegex.hasMatch(value)){
+    return 'La dirreccion no es valida';
+  }
+}
+
