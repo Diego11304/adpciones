@@ -1,4 +1,5 @@
 //imports
+import 'package:adopcionesmascotas/class/homescreen2.dart';
 import 'package:flutter/material.dart';
 import 'homescreen.dart';
 
@@ -16,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen>{
   @override
   void initState() {
   super.initState();
-  Future.delayed(Duration(seconds: 10),(){
+  Future.delayed(Duration(seconds: 3),(){
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_){
-          return HomeScreen();
+          return HomeScreen2();
         }));
   }
   );
