@@ -16,8 +16,9 @@ class _HomeScreenState extends State<HomeScreen2> {
 
   int _selectedIndex = 0;
 
+  //metodo de buscar mascotas
   void _ejecutarBusqueda() {
-    final todasLasMascotas = [...mascotas, ...mascotas2];//Lista unificada el ... es un operador para insetar todos los elementos de una coleccion
+    final todasLasMascotas = [...mascotas, ...mascotas2];//Lista unificada A1 el "..." es un operador para insetar todos los elementos de una coleccion
     showSearch(
       context: context,
       delegate: BusquedaMascota(todasLasMascotas),
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen2> {
     setState(() {
       _selectedIndex = index;
     });
-
+  //se ejecuta el metodo al selccionar el primer icono del menu del navbar
     if (index == 1) {
       _ejecutarBusqueda();
     }
@@ -181,11 +182,13 @@ class _HomeScreenState extends State<HomeScreen2> {
               },
             ),
 
+            //Menu hamburguesa para busqueda
             ListTile(
               leading: const Icon(Icons.search),
               title: const Text("Buscar"),
               onTap: () {
                 Navigator.pop(context);
+                //ejecuta el metodo de busqueda
                 _ejecutarBusqueda();
               },
             ),
