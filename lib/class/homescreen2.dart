@@ -3,73 +3,99 @@ import '../data/listdata.dart';
 import '../data/listdata2.dart';
 import 'cards.dart';
 import 'busquedamascota.dart';
+import 'formscreen.dart';
 
 class HomeScreen2 extends StatefulWidget {
-  HomeScreen2({super.key});
+  const HomeScreen2({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return _HomeScreenState();
-  }
+  State<HomeScreen2> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen2> {
+
+  int _selectedIndex = 0;
+
+  void _ejecutarBusqueda() {
+    final todasLasMascotas = [...mascotas, ...mascotas2];//Lista unificada el ... es un operador para insetar todos los elementos de una coleccion
+    showSearch(
+      context: context,
+      delegate: BusquedaMascota(todasLasMascotas),
+    );
+  }
+
+  void _onItemTapped(int index) {
+
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 1) {
+      _ejecutarBusqueda();
+    }
+
+    if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FormScreen(mascota: mascotas[1]),
+        ),
+      );
+    }
+
+    if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FormScreen(mascota: mascotas[2]),
+        ),
+      );
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: AppBar(
-        title: const Text(
-          'Adopta una huella',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Adopta una Huella 🐾'),
         centerTitle: true,
-        backgroundColor: Colors.tealAccent,
-        actions: [
-          IconButton(
-            tooltip: 'Buscar mascota',
-            icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () async {
-              await showSearch(
-                context: context,
-                delegate: BusquedaMascota([...mascotas, ...mascotas2]),
-              );
-            },
-          ),
-        ],
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16),
+
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-                'Mascotas en adopción',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)
-            ),
-            const SizedBox(height: 10),
+
             SizedBox(
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: mascotas.length,
                 itemBuilder: (context, index) {
+
                   final mascota = mascotas[index];
+
                   return Container(
                     width: 160,
                     margin: const EdgeInsets.only(right: 12),
                     child: MascotaCard(mascota: mascota),
                   );
+
                 },
               ),
             ),
 
-            const SizedBox(height: 30),
-
             Text(
-                'Mascotas extraviadas',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)
+              "Mascotas Extraviadas",
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 15),
+
+            const SizedBox(height: 20),
+
             Expanded(
               child: GridView.builder(
                 itemCount: mascotas2.length,
@@ -83,19 +109,113 @@ class _HomeScreenState extends State<HomeScreen2> {
                   return MascotaCard(mascota: mascotas2[index]);
                 },
               ),
-            )
+            ),
+
           ],
         ),
       ),
 
-      /*
+
       bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Inicio'),
-          NavigationDestination(icon: Icon(Icons.pets), label: 'Mascotas'),
+
+          NavigationDestination(
+            icon: Icon(Icons.pets),
+            label: 'Adoptar',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Icons.search),
+            label: 'Buscar',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Icons.favorite),
+            label: 'Favoritos',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Icons.person),
+            label: 'Perfil',
+          ),
+
         ],
       ),
-      */
+      /// DRAWER
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(
+                color: Color(0xFF6C63FF),
+              ),
+              accountName: const Text("Usuario"),
+              accountEmail: const Text("norma@itdurango.com"),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person, size: 40),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text("Inicio"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.pets),
+              title: const Text("Adoptar"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => FormScreen(mascota: mascotas[0]),
+                  ),
+                );
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.search),
+              title: const Text("Buscar"),
+              onTap: () {
+                Navigator.pop(context);
+                _ejecutarBusqueda();
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.favorite),
+              title: const Text("Favoritos"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+            const Divider(),
+
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text("Acerca de"),
+              onTap: () {
+                showAboutDialog(
+                  context: context,
+                  applicationName: "Adopta una Huella",
+                  applicationVersion: "1.0",
+                  applicationLegalese: "Proyecto educativo",
+                );
+              },
+            ),
+
+          ],
+        ),
+      ),
 
     );
   }
